@@ -1,6 +1,6 @@
 import express from "express"
-import { isAuth } from "../middlewares/isAuth"
-import { getLikedVideos, toggleCommentLike, toggleTweetLike, toggleVideoLike } from "../controllers/like.controller"
+import { isAuth } from "../middlewares/isAuth.js"
+import { getLikedVideos, toggleCommentLike, toggleTweetLike, toggleVideoLike } from "../controllers/like.controller.js"
 
 
 

@@ -1,7 +1,7 @@
 import express from "express";
-import { isAuth } from "../middlewares/isAuth";
-import { deleteVideo, getAllVideos, getVideoById, publishAVideo, togglePublishStatus, updateVideo } from "../controllers/video.controller";
-import { upload } from "../middlewares/multer";
+import { isAuth } from "../middlewares/isAuth.js";
+import { deleteVideo, getAllVideos, getVideoById, publishAVideo, togglePublishStatus, updateVideo } from "../controllers/video.controller.js";
+import { upload } from "../middlewares/multer.js";
 
 
 

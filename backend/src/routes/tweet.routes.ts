@@ -1,6 +1,6 @@
 import express from "express"
-import { isAuth } from "../middlewares/isAuth"
-import { createTweet, deleteTweet, getUserTweets, updateTweet } from "../controllers/tweet.controller"
+import { isAuth } from "../middlewares/isAuth.js"
+import { createTweet, deleteTweet, getUserTweets, updateTweet } from "../controllers/tweet.controller.js"
 
 
 const tweetRouter = express.Router()

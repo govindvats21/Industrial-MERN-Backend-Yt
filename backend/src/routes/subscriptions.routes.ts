@@ -1,6 +1,6 @@
 import express from "express";
-import { isAuth } from "../middlewares/isAuth";
-import { getsubscribedChannels, getUserChannelSubscribers, toggleSubscription } from "../controllers/subscription.controller";
+import { isAuth } from "../middlewares/isAuth.js";
+import { getsubscribedChannels, getUserChannelSubscribers, toggleSubscription } from "../controllers/subscription.controller.js";
 
 
 const subscriptionRouter = express.Router();

@@ -1,6 +1,6 @@
 import express from "express";
-import { isAuth } from "../middlewares/isAuth";
-import { addComment, deleteComment, getVideoComments, updateComment } from "../controllers/comment.controller";
+import { isAuth } from "../middlewares/isAuth.js";
+import { addComment, deleteComment, getVideoComments, updateComment } from "../controllers/comment.controller.js";
 
 
 const commentRouter = express.Router();

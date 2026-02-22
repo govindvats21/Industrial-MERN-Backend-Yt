@@ -1,7 +1,7 @@
 import express from "express";
-import { upload } from "../middlewares/multer";
-import { changeCurrentPassword, clearWatchHistory, getCurrentUser, getUserChannelProfile, getWatchHistory, loginUser, logoutUser, registerUser, updateAccountDetails, updateUserAvatarImage, updateUserCoverImage } from "../controllers/user.controller";
-import { isAuth } from "../middlewares/isAuth";
+import { upload } from "../middlewares/multer.js";
+import { changeCurrentPassword, clearWatchHistory, getCurrentUser, getUserChannelProfile, getWatchHistory, loginUser, logoutUser, registerUser, updateAccountDetails, updateUserAvatarImage, updateUserCoverImage } from "../controllers/user.controller.js";
+import { isAuth } from "../middlewares/isAuth.js";
 
  const userRouter = express.Router()
 
