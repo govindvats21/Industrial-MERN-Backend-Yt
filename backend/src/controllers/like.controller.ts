@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { asyncHandler } from "../services/asyncHandler";
+import { asyncHandler } from "../services/asyncHandler.js";
 import mongoose from "mongoose";
-import { Like } from "../models/like.model";
-import { ApiResponse } from "../utils/ApiResponse";
-import { ApiError } from "../utils/ApiError";
+import { Like } from "../models/like.model.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
 
 export const toggleVideoLike = asyncHandler(
   async (req: Request, res: Response) => {

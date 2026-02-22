@@ -1,12 +1,12 @@
 import multer from "multer";
-import { asyncHandler } from "../services/asyncHandler";
+import { asyncHandler } from "../services/asyncHandler.js";
 import { Request, Response } from "express";
-import { ApiError } from "../utils/ApiError";
-import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary";
-import { Video } from "../models/video.model";
-import { ApiResponse } from "../utils/ApiResponse";
+import { ApiError } from "../utils/ApiError.js";
+import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js";
+import { Video } from "../models/video.model.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose, { PipelineStage } from "mongoose";
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 
 export const publishAVideo = asyncHandler(
   async (req: Request, res: Response) => {

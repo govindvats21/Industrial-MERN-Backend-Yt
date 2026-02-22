@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { asyncHandler } from "../services/asyncHandler";
-import { Playlist } from "../models/playlist.model";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
+import { asyncHandler } from "../services/asyncHandler.js";
+import { Playlist } from "../models/playlist.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose from "mongoose";
-import { Video } from "../models/video.model";
+import { Video } from "../models/video.model.js";
 
 export const createPlaylist = asyncHandler(
   async (req: Request, res: Response) => {

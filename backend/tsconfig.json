@@ -3,18 +3,18 @@
     "rootDir": "./src",
     "outDir": "./dist",
 
-    "module": "ESNext",
-    "moduleResolution": "bundler", 
-    "target": "esnext",
+    "module": "NodeNext",           // <--- Ise NodeNext karo
+    "moduleResolution": "NodeNext", // <--- Ise bhi NodeNext karo
+    "target": "ESNext",
     
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
 
     "strict": true,
-    "esModuleInterop": true, // Isse import/export smooth ho jata hai
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "verbatimModuleSyntax": false, // Isse 'import type' ka compulsion khatam ho jayega
+    "verbatimModuleSyntax": false,
     "isolatedModules": true,
     "moduleDetection": "force"
   },

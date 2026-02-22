@@ -1,9 +1,9 @@
 import mongoose, { PipelineStage, Types } from "mongoose";
-import { asyncHandler } from "../services/asyncHandler";
+import { asyncHandler } from "../services/asyncHandler.js";
 import { Request, Response } from "express";
-import { Comment } from "../models/comment.model";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
+import { Comment } from "../models/comment.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 export const getVideoComments = asyncHandler(
   async (req: Request, res: Response) => {

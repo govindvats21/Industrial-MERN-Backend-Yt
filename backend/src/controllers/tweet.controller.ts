@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { asyncHandler } from "../services/asyncHandler";
-import { Tweet } from "../models/tweet.model";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
+import { asyncHandler } from "../services/asyncHandler.js";
+import { Tweet } from "../models/tweet.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose from "mongoose";
 
 export const createTweet = asyncHandler(async (req: Request, res: Response) => {

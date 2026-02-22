@@ -1,11 +1,13 @@
-import { asyncHandler } from "../services/asyncHandler";
+import mongoose from "mongoose";
+
+import { asyncHandler } from "../services/asyncHandler.js";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response } from "express";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { User } from "../models/user.model";
-import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary";
-import mongoose from "mongoose";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { User } from "../models/user.model.js";
+import { deleteFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js";
+
 
 const generateAccessAndRefreshTokens = async (
   userId: mongoose.Types.ObjectId

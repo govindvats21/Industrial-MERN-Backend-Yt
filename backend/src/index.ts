@@ -1,14 +1,14 @@
 import express, { Request, Response, Application } from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import { connectDB } from "./db/connection";
-import userRouter from "./routes/user.routes";
-import videoRouter from "./routes/video.routes";
-import subscriptionRouter from "./routes/subscriptions.routes";
-import tweetRouter from "./routes/tweet.routes";
-import commentRouter from "./routes/comment.routes";
-import likeRouter from "./routes/like.routes";
-import playlistRouter from "./routes/playlist.routes";
+import { connectDB } from "./db/connection.js";
+import userRouter from "./routes/user.route.js";
+import videoRouter from "./routes/video.route.js";
+import subscriptionRouter from "./routes/subscriptions.route.js";
+import tweetRouter from "./routes/tweet.routes.js";
+import commentRouter from "./routes/comment.route.js";
+import likeRouter from "./routes/like.route.js";
+import playlistRouter from "./routes/playlist.route.js";
 import cors from "cors";
 
 ;
