@@ -492,7 +492,7 @@ export const getUserChannelProfile = asyncHandler(
   }
 );
 
-export const getWatchHistory = asyncHandler(async (req, res) => {
+export const getWatchHistory = asyncHandler(async (req:Request, res:Response) => {
   const user = await User.aggregate([
     {
       $match: {
@@ -504,21 +504,29 @@ export const getWatchHistory = asyncHandler(async (req, res) => {
         from: "videos",
         localField: "watchHistory",
         foreignField: "_id",
-        as: "watchHistory", // Ye array banayega
+        as: "watchHistory",
         pipeline: [
           {
             $lookup: {
               from: "users",
-              localField: "owner",
+              localField: "owner", 
               foreignField: "_id",
-              as: "owner", // Ye bhi array banayega
+              as: "owner",
+              pipeline: [
+                {
+                  $project: {
+                    fullName: 1,
+                    username: 1,
+                    avatar: 1,
+                  },
+                },
+              ],
             },
           },
           {
             $addFields: {
-              // Yahan check karo ki "$owner" array hai ya nahi
               owner: {
-                $first: "$owner",
+                $first: "$owner", 
               },
             },
           },
@@ -527,17 +535,16 @@ export const getWatchHistory = asyncHandler(async (req, res) => {
     },
   ]);
 
-  if (!user.length) {
-    throw new ApiError(404, "User not found");
-  }
-
   return res
     .status(200)
     .json(
-      new ApiResponse(200, user[0].watchHistory, "History fetched successfully")
+      new ApiResponse(
+        200,
+        user[0]?.watchHistory || [],
+        "Watch history fetched successfully"
+      )
     );
 });
-
 // Example API Logic
 export const clearWatchHistory = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
