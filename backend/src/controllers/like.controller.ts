@@ -49,7 +49,7 @@ export const toggleCommentLike = asyncHandler(
     }
 
     const existingLike = await Like.findOne({
-      video: commentId,
+      comment: commentId,
       likedBy: req.user._id,
     });
 
@@ -62,13 +62,13 @@ export const toggleCommentLike = asyncHandler(
         );
     } else {
       await Like.create({
-        video: commentId,
+        comment: commentId,
         likedBy: req.user._id,
       });
       return res
         .status(200)
         .json(
-          new ApiResponse(200, { isLiked: true }, "Video liked successfully")
+          new ApiResponse(200, { isLiked: true }, "Comment liked successfully")
         );
     }
   }
@@ -83,7 +83,7 @@ export const toggleTweetLike = asyncHandler(
     }
 
     const existingLike = await Like.findOne({
-      video: tweetId,
+      tweet: tweetId,
       likedBy: req.user._id,
     });
 
@@ -96,13 +96,13 @@ export const toggleTweetLike = asyncHandler(
         );
     } else {
       await Like.create({
-        video: tweetId,
+        tweet: tweetId,
         likedBy: req.user._id,
       });
       return res
         .status(200)
         .json(
-          new ApiResponse(200, { isLiked: true }, "Video liked successfully")
+          new ApiResponse(200, { isLiked: true }, "Tweet liked successfully")
         );
     }
   }
