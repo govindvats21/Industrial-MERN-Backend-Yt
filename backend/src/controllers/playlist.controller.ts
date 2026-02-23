@@ -262,7 +262,7 @@ export const getPlaylistById = asyncHandler(
                 views: 1,
                 duration: 1,
                 createdAt: 1,
-                owner: 1,
+                videoOwner: 1,
               },
             },
           ],
