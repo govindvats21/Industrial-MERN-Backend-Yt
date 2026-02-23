@@ -242,11 +242,12 @@ export const getPlaylistById = asyncHandler(
                 from: "users",
                 localField: "owner",
                 foreignField: "_id",
-                as: "videoOnwer",
+                as: "videoOwner",
                 pipeline: [
                   {
                     $project: {
                       userName: 1,
+                      avatarImage: 1
                     },
                   },
                 ],
@@ -271,7 +272,7 @@ export const getPlaylistById = asyncHandler(
       {
         $addFields: {
           owner: {
-            $first: "$owner",
+            $first: "$videoOwner",
           },
           totalPlaylistVideos: {
             $size: "$videos",
