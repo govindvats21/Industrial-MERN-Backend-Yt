@@ -112,70 +112,63 @@ export const getLikedVideos = asyncHandler(
   async (req: Request, res: Response) => {
     //TODO: get all liked videos
 
-    const likedVideo = await Like.aggregate([
-      {
-        $match: {
-          likedBy: new mongoose.Types.ObjectId(req.user?._id),
-        },
-      },
-      {
-        $lookup: {
-          from: "videos",
-          localField: "video",
-          foreignField: "_id",
-          as: "videoDetails",
-          pipeline: [
-            {
-              $lookup: {
-                from: "users",
-                localField: "owner",
-                foreignField: "_id",
-                as: "owner",
-                pipeline: [
-                  {
-                    $project: {
-                      userName: 1,
-                    },
-                  },
-                ],
+   const likedVideo = await Like.aggregate([
+  {
+    $match: {
+      likedBy: new mongoose.Types.ObjectId(req.user?._id),
+    },
+  },
+  {
+    $lookup: {
+      from: "videos",
+      localField: "video",
+      foreignField: "_id",
+      as: "videoDetails",
+      pipeline: [
+        {
+          $lookup: {
+            from: "users",
+            localField: "owner",
+            foreignField: "_id",
+            as: "owner",
+            pipeline: [
+              {
+                $project: {
+                  userName: 1,
+                  fullName: 1,
+                  avatar: 1
+                },
               },
-            },
-            {
-              $unwind: "$owner",
-            },
-            {
-              $project: {
-                videoFile: 1,
-                thumbnail: 1,
-                title: 1,
-                duration: 1,
-                views: 1,
-                owner: 1,
-              },
-            },
-          ],
+            ],
+          },
         },
-      },
-      {
-        // Stage 3: Video array ko object banao (taki response clean ho)
-        $addFields: {
-          videoDetails: { $first: "$videoDetails" },
-          totalLikes: { $size: "$videoDetails" },
-        },
-      },
-      {
-        $project: {
-          videoDetails: 1,
-          totalLikes: 1,
-        },
-      },
-      {
-        // Stage 4: Latest liked videos ko pehle dikhao
-        $sort: {
-          createdAt: -1,
-        },
-      },
-    ]);
+        { $unwind: "$owner" },
+      ],
+    },
+  },
+  {
+    $addFields: {
+      videoDetails: { $first: "$videoDetails" },
+    },
+  },
+  // --- YE WALI STAGE ADD KARO ---
+  {
+    $match: {
+      videoDetails: { $ne: null } 
+    }
+  },
+  {
+    $project: {
+      videoDetails: 1,
+      createdAt: 1 
+    },
+  },
+  {
+    $sort: { createdAt: -1 },
+  },
+]);
+
+
     return res
       .status(200)
       .json(
