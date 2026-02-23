@@ -213,12 +213,40 @@ export const getPlaylistById = asyncHandler(
           _id: new mongoose.Types.ObjectId(playlistId as string),
         },
       },
+     {
+  $lookup: {
+    from: "users",
+    localField: "owner",
+    foreignField: "_id",
+    as: "owner",
+    pipeline: [
+      {
+        $project: {
+          userName: 1,
+          avatarImage: 1,
+        },
+      },
+    ],
+  },
+},
+{
+  $addFields: {
+    owner: { $first: "$owner" }, 
+  },
+},
+{
+  $lookup: {
+    from: "videos",
+    localField: "videos",
+    foreignField: "_id",
+    as: "videos",
+    pipeline: [
       {
         $lookup: {
           from: "users",
           localField: "owner",
           foreignField: "_id",
-          as: "owner",
+          as: "videoOwner",
           pipeline: [
             {
               $project: {
@@ -229,71 +257,43 @@ export const getPlaylistById = asyncHandler(
           ],
         },
       },
-
-      {
-        $lookup: {
-          from: "videos",
-          localField: "videos",
-          foreignField: "_id",
-          as: "videos",
-          pipeline: [
-            {
-              $lookup: {
-                from: "users",
-                localField: "owner",
-                foreignField: "_id",
-                as: "videoOwner",
-                pipeline: [
-                  {
-                    $project: {
-                      userName: 1,
-                      avatarImage: 1
-                    },
-                  },
-                ],
-              },
-            },
-
-            {
-              $project: {
-                videoFile: 1,
-                title: 1,
-                thumnail: 1,
-                views: 1,
-                duration: 1,
-                createdAt: 1,
-                videoOwner: 1,
-              },
-            },
-          ],
-        },
-      },
-
       {
         $addFields: {
-          owner: {
-            $first: "$videoOwner",
-          },
-          totalPlaylistVideos: {
-            $size: "$videos",
-          },
-          totalPlaylistViews: {
-            $sum: "$videos.views",
-          },
+          videoOwner: { $first: "$videoOwner" }, 
         },
       },
-
       {
         $project: {
+          videoFile: 1,
           title: 1,
-          description: 1,
-          owner: 1,
-          videos: 1,
-          totalPlaylistVideos: 1,
-          totalPlaylistViews: 1,
+          thumbnail: 1,
+          views: 1,
+          duration: 1,
+          createdAt: 1,
           videoOwner: 1,
         },
       },
+    ],
+  },
+},
+{
+  $addFields: {
+    totalPlaylistVideos: { $size: "$videos" },
+    totalPlaylistViews: { $sum: "$videos.views" },
+  },
+},
+{
+  $project: {
+    title: 1,
+    description: 1,
+    videos: 1,
+    owner: 1, 
+    totalPlaylistVideos: 1,
+    totalPlaylistViews: 1,
+  },
+}
+
+
     ]);
 
     if (!playlist.length) {
