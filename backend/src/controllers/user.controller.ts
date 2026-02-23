@@ -273,9 +273,9 @@ export const changeCurrentPassword = asyncHandler(
       throw new ApiError(400, "plz enter all fields");
     }
 
-    const user = req.user;
-    if (!user) {
-      throw new ApiError(401, "User not authenticated");
+  const user = await User.findById(req.user?._id);
+  if (!user) {
+      throw new ApiError(404, "User not found");
     }
     const isPasswordCorrect = await user?.isPasswordCorrect(oldPassword);
 

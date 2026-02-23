@@ -1,6 +1,14 @@
 import express from "express";
 import { isAuth } from "../middlewares/isAuth.js";
-import { addVideoToPlaylist, createPlaylist, deletePlaylist, getPlaylistById, getUserPlaylists, removeVideoFromPlaylist, updatePlaylist } from "../controllers/playlist.controller.js";
+import {
+  addVideoToPlaylist,
+  createPlaylist,
+  deletePlaylist,
+  getPlaylistById,
+  getUserPlaylists,
+  removeVideoFromPlaylist,
+  updatePlaylist,
+} from "../controllers/playlist.controller.js";
 
 const playlistRouter = express.Router();
 
@@ -14,9 +22,5 @@ playlistRouter.get("/:playlistId", getPlaylistById);
 playlistRouter.patch("/add/:videoId/:playlistId", addVideoToPlaylist);
 playlistRouter.patch("/remove/:videoId/:playlistId", removeVideoFromPlaylist);
 playlistRouter.get("/user/:userId", getUserPlaylists);
-
-
-
-
 
 export default playlistRouter;
